@@ -30,34 +30,51 @@ h1{
 }
 .pokeCard{
     flex-direction: column;
-    display: flex;
-    background-color: #eee;
+    background-color: #96d180;
     border-radius: 10px;
     box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
     margin: 10px;
     padding: 20px;
     text-align: center;
 }
-.pokeName{
+#pokeName{
     font-size: 1.5rem;
-    color: #333;
-    margin-bottom: 10px;
+    color: #000000;
+    margin-bottom: 15px;
+    letter-spacing: 1.5px;
 }
 .pokeImage{
     background-color: rgba(255, 255, 255, 0.6);
     border-radius: 50%;
+    padding: 20px;
+    box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
 }
-.pokeType{
+#pokeId{
+    font-size: 1.2rem;
+    color: #555;
+    margin: 15px;
+}
+#pokeIdNumber{
+    font-size: 1.2rem;
+    color: #000000;
+    margin: 50px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 30%;
+    padding: 10px;
+    
+}
+
+#pokeType{
     font-size: 1.2rem;
     color: #555;
     margin-top: 10px;
 }
-.pokeHeight{
+#pokeHeight{
     font-size: 1.2rem;
     color: #555;
     margin-top: 10px;
 }
-.pokeWeight{
+#pokeWeight{
     font-size: 1.2rem;
     color: #555;
     margin-top: 10px;
