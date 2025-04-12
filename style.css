@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+body{
+    background: linear-gradient(to right, #d4d3dd, #efefbb);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+h1{
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.pokeContainer{
+    
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+.pokeCard{
+    flex-direction: column;
+    display: flex;
+    background-color: #eee;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+}
+.pokeName{
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+.pokeImage{
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+}
+.pokeType{
+    font-size: 1.2rem;
+    color: #555;
+    margin-top: 10px;
+}
+.pokeHeight{
+    font-size: 1.2rem;
+    color: #555;
+    margin-top: 10px;
+}
+.pokeWeight{
+    font-size: 1.2rem;
+    color: #555;
+    margin-top: 10px;
+}
