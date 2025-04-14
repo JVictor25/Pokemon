@@ -24,15 +24,18 @@ h1{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    gap: 20px;
     justify-content: space-between;
     margin: 0 auto;
-    max-width: 1200px;
+    max-width: 1500px;
 }
 .pokeCard{
+    min-width:250px;
+    max-width: 250px;
+    min-height: 200px;
     flex-direction: column;
-    background-color: #96d180;
     border-radius: 10px;
-    box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
+    box-shadow: 0 20px 30px rgba(100, 100, 100, 0.5);
     margin: 10px;
     padding: 20px;
     text-align: center;
