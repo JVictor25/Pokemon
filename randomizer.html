@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Pokedex</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="RandomizarTeam" content="">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <nav>
+        <h2></h2>
+        <ul>
+            <li><a href="index.html">Pokedex</a></li>
+            <li><a href="randomizer.html">Randomizar Time Pokémon</a></li>
+        </ul>
+    </nav>
+
+    <h1>Pokedex</h1>
+    <div class="teamContainer" id="teamContainer">
+        <div class="pokeCard" id="pokerandom1">
+            <img src="Random.png" class="imgRandom" id="imgRandom">
+            <p id="pokeId"><span id="pokeIdNumber"> ???????</span></p>
+            <p id="pokeType">Type: ???????</p>
+            <p id="pokeHeight">Height: ???????</p>
+            <p id="pokeWeight">Weight: ???????</p>
+        </div>
+        <div class="pokeCard" id="pokerandom2">
+            <img src="Random.png" class="imgRandom" id="imgRandom">
+            <p id="pokeId"><span id="pokeIdNumber"> ???????</span></p>
+            <p id="pokeType">Type: ???????</p>
+            <p id="pokeHeight">Height: ???????</p>
+            <p id="pokeWeight">Weight: ???????</p>
+        </div>
+        <div class="pokeCard" id="pokerandom3">
+            <img src="Random.png" class="imgRandom" id="imgRandom">
+            <p id="pokeId"><span id="pokeIdNumber"> ???????</span></p>
+            <p id="pokeType">Type: ???????</p>
+            <p id="pokeHeight">Height: ???????</p>
+            <p id="pokeWeight">Weight: ???????</p>
+        </div>
+        <div class="pokeCard" id="pokerandom4">
+            <img src="Random.png" class="imgRandom" id="imgRandom">
+            <p id="pokeId"><span id="pokeIdNumber"> ???????</span></p>
+            <p id="pokeType">Type: ???????</p>
+            <p id="pokeHeight">Height: ???????</p>
+            <p id="pokeWeight">Weight: ???????</p>
+        </div>
+        <div class="pokeCard" id="pokerandom5">
+            <img src="Random.png" class="imgRandom" id="imgRandom">
+            <p id="pokeId"><span id="pokeIdNumber"> ???????</span></p>
+            <p id="pokeType">Type: ???????</p>
+            <p id="pokeHeight">Height: ???????</p>
+            <p id="pokeWeight">Weight: ???????</p>
+        </div>
+        <div class="pokeCard" id="pokerandom6">
+            <img src="Random.png" class="imgRandom" id="imgRandom">
+            <p id="pokeId"><span id="pokeIdNumber"> ???????</span></p>
+            <p id="pokeType">Type: ???????</p>
+            <p id="pokeHeight">Height: ???????</p>
+            <p id="pokeWeight">Weight: ???????</p>
+        </div> 
+    </div>
+    <form id="requisitosForm">
+        <h3>Requisitos para Randomizar Time Pokémon</h3>
+        <div class="checkboxRandom">
+            <label>
+                <input type="checkbox" name="incluirInicial" id="incluirInicial">
+                Incluir um Pokémon Inicial
+            </label>
+            <label>
+                <input type="checkbox" name="soEvoluidos" id="soEvoluidos">
+                Usar apenas Pokémon completamente evoluídos
+            </label>
+            <label>
+                <input type="checkbox" name="semLendarios" id="semLendarios">
+                Sem Pokémon Lendários
+            </label>
+            <label>
+                <input type="checkbox" name="semMiticos" id="semMiticos">
+                Sem Pokémon Míticos
+            </label>
+            <label>
+                <input type="checkbox" name="randomizeInteligente" id="randomizeInteligente">
+                Randomize inteligentemente de acordo com a quantidade de pokemons do ginásio
+            </label>
+        </div>
+    </form>
+    <script src="script.js" async defer></script>
+</body>
+</html>

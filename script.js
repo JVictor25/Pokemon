@@ -31,6 +31,12 @@ const fetchPokemons = async () => {
         await getPokemonData(i);
     }
 }
+
+const randomPokemon = () => {
+    const randomNumber = Math.floor(Math.random() * pokemonCounter) + 1;
+    getPokemonData(randomNumber);
+}
+
 const getPokemonData = async (id) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const response = await fetch(url);
@@ -67,7 +73,7 @@ const createPokemonCard = (pokemon) => {
                 <p id="pokeId"><span id="pokeIdNumber">#${id}</span></p>
                 <p id="pokeType">Type: ${type.toUpperCase()}</p>
                 <p id="pokeHeight">Height: ${Height}${mt}</p>
-                <p id="pokeWeight">Weight: ${Weight} KG}</p>
+                <p id="pokeWeight">Weight: ${Weight} KG</p>
             </div>`
             pokemonEl.innerHTML = pokemonInnerHTML;
             pokemonContainer.appendChild(pokemonEl);    
@@ -76,5 +82,7 @@ const createPokemonCard = (pokemon) => {
 
 
 
-fetchPokemons();
+//fetchPokemons();
+randomPokemon();
+
 
