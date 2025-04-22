@@ -32,6 +32,11 @@ const fetchPokemons = async () => {
     }
 }
 
+const randomPokemon = () => {
+    const randomNumber = Math.floor(Math.random() * pokemonCounter) + 1;
+    getPokemonData(randomNumber);
+}
+
 const getPokemonData = async (id) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const response = await fetch(url);
@@ -77,7 +82,5 @@ const createPokemonCard = (pokemon) => {
 
 
 
-fetchPokemons();
-
-
-
+//fetchPokemons();
+randomPokemon();
