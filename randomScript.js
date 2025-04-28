@@ -2,6 +2,7 @@ const pokemonContainer = document.querySelector("#teamContainer");
 const btnRandomizar = document.getElementById("btnRandomizar");
 
 pokemonCounter = 1025;
+pokemonEvoChains = 549;
 
 const colors = {
     fire: '#FDDFDF',
@@ -57,8 +58,6 @@ const createPokemonCard = (pokemon) => {
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png" class="pokeImage">
             <p><span>#${id}</span></p>
             <p>Type: ${type.toUpperCase()}</p>
-            <p>Height: ${Height}${mt}</p>
-            <p>Weight: ${Weight} KG</p>
         </div>`;
 
     pokemonEl.innerHTML = pokemonInnerHTML;
