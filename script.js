@@ -1,9 +1,9 @@
 const pokemonContainer = document.querySelector("#pokeContainer")
 const searchInput = document.getElementById('search-input');
 
-pokemonCounter= 1025;
+const pokemonCounter= 1025;
 
-colors = {
+const colors = {
     fire: '#FDDFDF',
     grass: '#DEFDE0',
     electric: '#FCF7DE',
@@ -45,7 +45,6 @@ const getPokemonData = async (id) => {
 
 const createPokemonCard = (pokemon) => {
     const pokemonEl = document.createElement('div');
-    pokemonEl.classList.add('pokemon');
 
     const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
     const id = pokemon.id.toString().padStart(3, '0');

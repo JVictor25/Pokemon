@@ -1,7 +1,8 @@
 const pokemonContainer = document.querySelector("#teamContainer");
 const btnRandomizar = document.getElementById("btnRandomizar");
+const checkInicial = document.getElementById("incluirInicial"); 
 
-pokemonCounter = 1025;
+const pokemonCounter = 150;
 pokemonEvoChains = 549;
 
 const colors = {
