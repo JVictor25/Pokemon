@@ -1,9 +1,10 @@
 const pokemonContainer = document.querySelector("#teamContainer");
 const btnRandomizar = document.getElementById("btnRandomizar");
 const checkInicial = document.getElementById("incluirInicial"); 
+const checkSoEvoluidos = document.getElementById("soEvoluidos");
 
-const pokemonCounter = 150;
-pokemonEvoChains = 549;
+const pokemonCounterFireRed = 151;
+
 
 const colors = {
     fire: '#FDDFDF',
@@ -65,15 +66,71 @@ const createPokemonCard = (pokemon) => {
     pokemonContainer.appendChild(pokemonEl);
 }
 
-const randomTeam = () => {
+const getFullEvolved = async (id) => {
+    const url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error('Pokemon not found');
+    }
+    const data = await response.json();
+    const evolutionChainUrl = data.evolution_chain.url;
+    const evolutionResponse = await fetch(evolutionChainUrl);
+    if (!evolutionResponse.ok) {
+        throw new Error('Evolution chain not found');
+    }
+    const evolutionData = await evolutionResponse.json();
+    const chain = evolutionData.chain;
+
+    let estagioAtual = chain;
+
+    while (estagioAtual.evolves_to.length > 0) {
+        estagioAtual = estagioAtual.evolves_to[0];
+    }
+
+    const urlDoPokemonMaisEvoluido = estagioAtual.species.url;
+
+    const idDoPokemonMaisEvoluido = parseInt(urlDoPokemonMaisEvoluido.split('/').slice(-2, -1)[0]);
+
+    return idDoPokemonMaisEvoluido;
+}
+
+
+const randomTeam = async () => {
     pokemonContainer.innerHTML = '';
     const usedIds = new Set();
-    while (usedIds.size < 6) {
-        const randomId = Math.floor(Math.random() * pokemonCounter) + 1;
-        if (!usedIds.has(randomId)) {
-            usedIds.add(randomId);
-            getPokemonData(randomId);
+    const isInicialChecked = checkInicial.checked;
+    if (isInicialChecked) {
+        if (checkSoEvoluidos.checked) {
+            const starters = [3, 6, 9];
+            const randomStartersId = Math.floor(Math.random() * starters.length);
+            usedIds.add(starters[randomStartersId]);
         }
+        else {
+            const starters = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+            const randomStartersId = Math.floor(Math.random() * starters.length);
+            usedIds.add(starters[randomStartersId]);
+        }
+    }
+    while (usedIds.size < 6) {
+    const randomId = Math.floor(Math.random() * pokemonCounterFireRed) + 1;
+
+    if (checkSoEvoluidos.checked) {
+        try {
+            const fullEvolvedId = await getFullEvolved(randomId);
+
+            if (fullEvolvedId && !usedIds.has(fullEvolvedId)) {
+                usedIds.add(fullEvolvedId);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    else if (!usedIds.has(randomId)) {
+        usedIds.add(randomId);
+    }
+}
+    for(const id of usedIds) {
+        getPokemonData(id);
     }
 }
 
