@@ -76,7 +76,7 @@ const getFullEvolved = async (id) => {
     const evolutionChainUrl = data.evolution_chain.url;
     const evolutionResponse = await fetch(evolutionChainUrl);
     if (!evolutionResponse.ok) {
-        throw new Error('Evolution chain not found');
+        throw new Error('Evolutionchain not found');
     }
     const evolutionData = await evolutionResponse.json();
     const chain = evolutionData.chain;
