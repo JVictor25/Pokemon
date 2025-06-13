@@ -84,7 +84,14 @@ const getFullEvolved = async (id) => {
     let estagioAtual = chain;
 
     while (estagioAtual.evolves_to.length > 0) {
-        estagioAtual = estagioAtual.evolves_to[0];
+        const estagioFuturo = estagioAtual.evolves_to[0];
+        const auxEvolucaoFuturo = estagioFuturo.species.url;
+        const auxEvolucaoFireRed=parseInt(auxEvolucaoFuturo.split('/').slice(-2, -1)[0]);
+        if(auxEvolucaoFireRed < pokemonCounterFireRed) {
+            estagioAtual = estagioAtual.evolves_to[0];
+        }else {
+            break;
+        }
     }
 
     const urlDoPokemonMaisEvoluido = estagioAtual.species.url;
