@@ -2,8 +2,11 @@ const pokemonContainer = document.querySelector("#teamContainer");
 const btnRandomizar = document.getElementById("btnRandomizar");
 const checkInicial = document.getElementById("incluirInicial"); 
 const checkSoEvoluidos = document.getElementById("soEvoluidos");
+const checkSemLendarios = document.getElementById("semLendarios");
+const checksemMiticos = document.getElementById("semMiticos");
 
 const pokemonCounterFireRed = 151;
+const legendaryIds = [144, 145, 146, 150, 151];
 
 
 const colors = {
@@ -48,9 +51,6 @@ const createPokemonCard = (pokemon) => {
     const pokeTypes = pokemon.types.map(type => type.type.name);
     const type = mainTypes.find(type => pokeTypes.indexOf(type) > -1);
     const color = colors[type];
-    const Height = pokemon.height / 10;
-    const Weight = pokemon.weight / 10;
-    const mt = Height >= 2 ? " Mts" : " M";
 
     pokemonEl.style.backgroundColor = color;
 
@@ -106,6 +106,9 @@ const randomTeam = async () => {
     pokemonContainer.innerHTML = '';
     const usedIds = new Set();
     const isInicialChecked = checkInicial.checked;
+    const isSoEvoluidosChecked = checkSoEvoluidos.checked;
+    const isSemLendariosChecked = checkSemLendarios.checked;
+    const isSemMiticosChecked = checksemMiticos.checked;
     if (isInicialChecked) {
         if (checkSoEvoluidos.checked) {
             const starters = [3, 6, 9];
@@ -120,8 +123,14 @@ const randomTeam = async () => {
     }
     while (usedIds.size < 6) {
     const randomId = Math.floor(Math.random() * pokemonCounterFireRed) + 1;
-
-    if (checkSoEvoluidos.checked) {
+    if (isSemLendariosChecked && legendaryIds.includes(randomId)) {
+        continue;
+    }
+    if (isSemMiticosChecked && randomId == 151) {
+        continue;
+    }
+    
+    else if (isSoEvoluidosChecked) {
         try {
             const fullEvolvedId = await getFullEvolved(randomId);
 
