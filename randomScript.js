@@ -5,6 +5,7 @@ const checkSoEvoluidos = document.getElementById("soEvoluidos");
 const checkSemLendarios = document.getElementById("semLendarios");
 const checksemMiticos = document.getElementById("semMiticos");
 const checkRandomizeInteligente = document.getElementById("randomizeInteligente");
+const checkTipoNaoRepete = document.getElementById("tipoNaoRepete");
 
 const pokemonCounterFireRed = 151;
 const legendaryIds = [144, 145, 146, 150, 151];
@@ -165,8 +166,15 @@ const createPokemonCard = (pokemon) => {
 
     const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
     const id = pokemon.id.toString().padStart(3, '0');
+
     const pokeTypes = pokemon.types.map(type => type.type.name);
-    const type = mainTypes.find(type => pokeTypes.indexOf(type) > -1);
+    let type = mainTypes.find(type => pokeTypes.indexOf(type) > -1);
+    if (type=='fairy'){
+        type = 'normal';
+    }
+    if (id == 122) {
+        type = 'psychic';
+    }
     const color = colors[type];
 
     pokemonEl.style.backgroundColor = color;
@@ -218,29 +226,57 @@ const getFullEvolved = async (id) => {
     return idDoPokemonMaisEvoluido;
 }
 
+const getType = async (id) => {
+    const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error('Pokemon not found');
+    }
+    const pokemon = await response.json();
+    const pokeTypes = pokemon.types.map(type => type.type.name);
+    let type = mainTypes.find(type => pokeTypes.indexOf(type) > -1);
+    if (type=='fairy'){
+        type = 'normal';
+    }
+    if (id == 122) {
+        type = 'psychic';
+    }
+    return type;
+
+
+}
 
 const randomTeam = async () => {
     pokemonContainer.innerHTML = '';
     const usedIds = new Set();
+    const usedTypes = new Set();
     const isInicialChecked = checkInicial.checked;
     const isSoEvoluidosChecked = checkSoEvoluidos.checked;
     const isSemLendariosChecked = checkSemLendarios.checked;
     const isSemMiticosChecked = checksemMiticos.checked;
     const isRandomizeInteligenteChecked = checkRandomizeInteligente.checked;
+    const isTipoNaoRepeteChecked = checkTipoNaoRepete.checked;
     if (isInicialChecked) {
         if (checkSoEvoluidos.checked) {
             const starters = [3, 6, 9];
             const randomStartersId = Math.floor(Math.random() * starters.length);
+            usedTypes.add(await getType(starters[randomStartersId]));
             usedIds.add(starters[randomStartersId]);
         }
         else {
             const starters = [1, 2, 3, 4, 5, 6, 7, 8, 9];
             const randomStartersId = Math.floor(Math.random() * starters.length);
+            usedTypes.add(await getType(starters[randomStartersId]));
             usedIds.add(starters[randomStartersId]);
+
         }
     }
     while (usedIds.size < 6) {
     const randomId = Math.floor(Math.random() * pokemonCounterFireRed) + 1;
+    const starters = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    if (starters.includes(randomId)) {
+        continue;
+    }
     if (isSemLendariosChecked && legendaryIds.includes(randomId)) {
         continue;
     }
@@ -265,15 +301,24 @@ const randomTeam = async () => {
     if (isSoEvoluidosChecked) {
         try {
             const fullEvolvedId = await getFullEvolved(randomId);
-
+            const fullEvolvedType = await getType(fullEvolvedId);
+            if (isTipoNaoRepeteChecked && usedTypes.has(fullEvolvedType)) {
+                continue;
+            }
             if (fullEvolvedId && !usedIds.has(fullEvolvedId)) {
+                usedTypes.add(fullEvolvedType);
                 usedIds.add(fullEvolvedId);
             }
         } catch (error) {
             console.error(error);
         }
     }
+    const randomType = await getType(randomId);
+    if (isTipoNaoRepeteChecked && usedTypes.has(randomType)) {
+        continue;
+    }
     else if (!usedIds.has(randomId)) {
+        usedTypes.add(randomType);
         usedIds.add(randomId);
     }
 }
