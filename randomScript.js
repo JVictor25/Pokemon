@@ -192,6 +192,8 @@ const createPokemonCard = (pokemon) => {
 }
 
 const getFullEvolved = async (id) => {
+    const nidoranIdsF = [29, 30, 31]; 
+    const nidoranIdsM = [32, 33, 34]; 
     const url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
     const response = await fetch(url);
     if (!response.ok) {
@@ -222,6 +224,13 @@ const getFullEvolved = async (id) => {
     const urlDoPokemonMaisEvoluido = estagioAtual.species.url;
 
     const idDoPokemonMaisEvoluido = parseInt(urlDoPokemonMaisEvoluido.split('/').slice(-2, -1)[0]);
+    if(nidoranIdsF.has(idDoPokemonMaisEvoluido)) {
+        return nidoranIdsF[2]; // Retorna Nidoqueen
+    }
+    if(nidoranIdsM.has(idDoPokemonMaisEvoluido)) {
+        return nidoranIdsM[2]; // Retorna Nidoking
+    }
+
 
     return idDoPokemonMaisEvoluido;
 }
@@ -313,11 +322,11 @@ const randomTeam = async () => {
             console.error(error);
         }
     }
-    const randomType = await getType(randomId);
-    if (isTipoNaoRepeteChecked && usedTypes.has(randomType)) {
-        continue;
-    }
     else if (!usedIds.has(randomId)) {
+        const randomType = await getType(randomId);
+        if (isTipoNaoRepeteChecked && usedTypes.has(randomType)) {
+        continue;
+        }
         usedTypes.add(randomType);
         usedIds.add(randomId);
     }
