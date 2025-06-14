@@ -224,10 +224,10 @@ const getFullEvolved = async (id) => {
     const urlDoPokemonMaisEvoluido = estagioAtual.species.url;
 
     const idDoPokemonMaisEvoluido = parseInt(urlDoPokemonMaisEvoluido.split('/').slice(-2, -1)[0]);
-    if(nidoranIdsF.has(idDoPokemonMaisEvoluido)) {
+    if(nidoranIdsF.includes(idDoPokemonMaisEvoluido)) {
         return nidoranIdsF[2]; // Retorna Nidoqueen
     }
-    if(nidoranIdsM.has(idDoPokemonMaisEvoluido)) {
+    if(nidoranIdsM.includes(idDoPokemonMaisEvoluido)) {
         return nidoranIdsM[2]; // Retorna Nidoking
     }
 
